@@ -12,7 +12,8 @@
     "mongodb": "3.0.6"
   },
   "devDependencies": {
-    "eslint-config-google": "^0.9.1"
+    "@types/ragemp-c": "github:CocaColaBear/types-ragemp-c#master",
+    "@types/ragemp-s": "github:CocaColaBear/types-ragemp-s#master"
   },
   "scripts": {
     "start": "./server.exe"

@@ -1,4 +1,9 @@
 'use strict';
+
+
+let score = 0
+
+
 /**
  * Colshape events
  * @memberof ragemp.client
@@ -11,6 +16,27 @@
  * @param {Object} shape The colshape that was entered.
  */
 mp.events.add('playerEnterColshape', (shape) => {
+
+
+    if (shape.getVariable("finish")) {
+        mp.events.callRemote("gokuFinished", score)
+        score = 0
+
+        mp.browsers.forEach((b) => {
+            if (b.url === 'package://index.html') b.destroy()
+        })
+
+
+        mp.game.audio.playSoundFrontend(-1, "Bed", "WastedSounds", true);
+
+
+    } else {
+        score = score + 100
+        mp.gui.chat.push(score.toString())
+    }
+
+
+
 });
 
 /**

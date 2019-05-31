@@ -198,6 +198,103 @@ let config = {
       player.outputChatBox(`Bank: !{0, 153, 255}${player.character.bank}`);
     },
   },
+
+  'goku': {
+    category: 'user',
+    hint: 'El bueno de Goku',
+    permissions: ['cmd.nuevos'],
+    call: (player, args) => {
+
+      //limpiar colshapes y markers
+      mp.colshapes.forEach((x) => {
+        if (x.getVariable("goku")) x.destroy()
+      })
+
+      mp.markers.forEach((x) => {
+        if (x.getVariable("goku")) x.destroy()
+      })
+      
+      player.giveWeapon(0xFBAB5776, 2) // Parachute
+
+      let max = 1000
+      let min = -1000
+
+      let x = Math.random() * (max - min) + min;
+      let y = Math.random() * (max - min) + min;
+      let z = 3500
+
+      let xx = x
+      let yy = y
+      let zz = z
+
+      min = -10
+      max = +10
+
+      while (zz > 2000) {
+        zz = zz - 100
+        xx = xx + (Math.random() * (max - min) + min);
+        yy = yy + (Math.random() * (max - min) + min);
+
+        let col = mp.colshapes.newSphere(xx, yy, zz, 10);
+        let mark = mp.markers.new(27, new mp.Vector3(xx, yy, zz), 20, { color: [255, 10, 10, 100], visible: true })
+
+        col.setVariable("goku",true)
+        mark.setVariable("goku",true)
+
+
+        //cada vez mas randoms
+        min = min - 2.5
+        max = max + 2.5
+      }
+
+      zz = zz -300
+
+      let collshapeFinish = mp.colshapes.newSphere(xx, yy, zz, 50);
+      let markerFinish = mp.markers.new(27, new mp.Vector3(xx, yy, zz), 100, { color: [63, 191, 63, 100], visible: true })
+
+      collshapeFinish.setVariable("goku", true)
+      collshapeFinish.setVariable("finish",true)
+      markerFinish.setVariable("goku",true)
+
+
+      //pelo
+      player.setClothes(2, 11, 0, 0)
+      player.setHairColor(15, 15)
+
+      //pantalones
+      player.setClothes(4,19,0,2)
+
+      //camiseta
+      player.setClothes(11,40,0,2)
+
+      //camiseta debajo
+      player.setClothes(8,54,0,2)
+
+      //brazos
+      player.setClothes(3,2,0,2)
+
+      //zapatos
+      player.setClothes(6,15,0,2)
+
+
+      player.spawn(new mp.Vector3(x, y, z))
+
+      let id = player.character.socialClub
+      let found = false
+      yarp.scores.forEach((x) => {
+
+        if (x.id === id) {
+          found = true
+          player.outputChatBox(`!{255, 0, 0}PUNTUACIÓN MÁXIMA:${x.score}`)
+        }
+      })
+
+      if (!found) {
+        player.outputChatBox(`!{255, 0, 0}Consigue la mayor puntuación posible`)
+      }
+    },
+  },
+
   '?': {
     category: 'user',
     hint: 'Lists existing commands for each category.',
@@ -215,7 +312,7 @@ let config = {
             player.outputChatBox(`!{yellow}HINT!{white}: ${command.hint}`);
           }
         }
-     }
+      }
     },
   },
 };

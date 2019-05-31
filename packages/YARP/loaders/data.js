@@ -9,6 +9,9 @@ module.exports = async () => {
   try {
     await yarp.blips.load();
     await yarp.characters.load();
+
+    await yarp.scores.load();
+
     await yarp.checkpoints.load();
     await yarp.colshapes.load();
     await yarp.commands.load();

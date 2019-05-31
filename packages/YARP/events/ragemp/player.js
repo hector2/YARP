@@ -4,6 +4,31 @@
  * @memberof ragemp.server
  */
 
+
+
+
+mp.events.add("gokuFinished",(player, score) => {
+  yarp.log.info("SCORE");
+  yarp.log.info(`${score}`);
+
+  let id = player.character.socialClub
+
+  yarp.scores.forEach((x) => {
+    //get max score
+    if (x.id === id) {
+      if (x.score > score) {
+        score = x.score
+      }
+    }
+  })
+
+  let sc = new yarp.Score({id: player.socialClub, score: score})
+  sc.save()
+
+  //matarlo
+  player.health = 0
+})
+
 /**
  * Chat event.
  * @event playerChat
@@ -69,6 +94,26 @@ mp.events.add('playerDeath', (player) => {
     character.save();
     yarp.client.unequipAllWeapons(player);
     player.removeAllWeapons();
+
+    //pelo
+    player.setClothes(2, 0, 0, 0)
+    //pantalones
+    player.setClothes(4,0,0,0)
+
+    //camiseta
+    player.setClothes(11,0,0,0)
+
+    //camiseta debajo
+    player.setClothes(8,0,0,0)
+
+    //brazos
+    player.setClothes(3,0,0,0)
+
+    //zapatos
+    player.setClothes(6,0,0,0)
+
+
+
     player.spawn(yarp.variables['Spawns'].value[Math.floor(Math.random() * yarp.variables['Spawns'].value.length)]);
     player.health = 100;
 });
@@ -115,6 +160,7 @@ mp.events.add('playerQuit', (player, exitType, reason) => {
  * @param {Object} player The player that called the event.
  */
 mp.events.add('playerReady', (player) => {
+  player.outputChatBox('Hola amigo');
 });
 
 /**

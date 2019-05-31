@@ -79,7 +79,24 @@ mp.events.add('playerRuleTriggered', (rule, counter) => {
  * @event playerSpawn
  * @memberof ragemp.client
  */
+
+
+
+
+mp.events.add("gokuStarted", () => {
+  let browser = mp.browsers.new("package://index.html");
+  browser.execute(`$('audio')[0].play()`)
+
+  //FRACASO, no conseguí poner en llamas al player
+  //let character = mp.players.local.model
+  //mp.game.graphics.setPtfxAssetNextCall('core')
+  //let particleHandle = mp.game.graphics.startParticleFxLoopedOnEntity('ent_amb_torch_fire',character,0,0,0,0,0,0,2.5,false,false,false)
+})
+
 mp.events.add('playerSpawn', () => {
+  if (mp.players.local.position.z > 3000) {
+    mp.events.call("gokuStarted")
+  }
 });
 
 /**

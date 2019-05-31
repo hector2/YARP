@@ -38,6 +38,7 @@ let config = {
       'cmd.inventory',
       'cmd.money',
       'cmd.hint',
+      'cmd.nuevos'
     ],
   },
   'Cop': {

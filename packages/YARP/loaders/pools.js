@@ -9,6 +9,9 @@ module.exports = async () => {
   try {
     yarp.blips = new yarp.Pool(yarp.Blip);
     yarp.characters = new yarp.Pool(yarp.Character);
+
+    yarp.scores = new yarp.Pool(yarp.Score);
+
     yarp.checkpoints = new yarp.Pool(yarp.Checkpoint);
     yarp.colshapes = new yarp.Pool(yarp.Colshape);
     yarp.commands = new yarp.Pool(yarp.Command);

@@ -9,6 +9,9 @@ module.exports = async () => {
   try {
     yarp.Blip = require('../classes/Blip.js');
     yarp.Character = require('../classes/Character.js');
+
+    yarp.Score = require('../classes/Score.js');
+
     yarp.Checkpoint = require('../classes/Checkpoint.js');
     yarp.Colshape = require('../classes/Colshape.js');
     yarp.Command = require('../classes/Command.js');
